@@ -27,3 +27,4 @@ if [[ $enable_battery == true ]]; then
 fi
 
 echo ''
+
