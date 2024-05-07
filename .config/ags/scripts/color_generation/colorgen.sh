@@ -46,14 +46,10 @@ if [[ "$1" = "#"* ]]; then # this is a color
         color_generation/applycolor.sh
     fi
 elif [ "$backend" = "material" ]; then
-    smartflag=''
-    if [ "$3" = "--smart" ]; then
-        smartflag='--smart'
-    fi
     color_generation/generate_colors_material.py --path "$1" \
     --mode "$lightdark" --scheme "$materialscheme" --transparency "$transparency" \
     --termscheme $terminalscheme --blend_bg_fg \
-    --cache "$HOME/.cache/ags/user/color.txt" $smartflag \
+    --cache "$HOME/.cache/ags/user/color.txt" \
     > "$HOME"/.cache/ags/user/generated/material_colors.scss
     if [ "$2" = "--apply" ]; then
         cp "$HOME"/.cache/ags/user/generated/material_colors.scss "$HOME/.config/ags/scss/_material.scss"
