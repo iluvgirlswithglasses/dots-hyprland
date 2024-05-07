@@ -43,7 +43,6 @@ if [[ "$1" = "#"* ]]; then # this is a color
     > "$HOME"/.cache/ags/user/generated/material_colors.scss
     if [ "$2" = "--apply" ]; then
         cp "$HOME"/.cache/ags/user/generated/material_colors.scss "$HOME/.config/ags/scss/_material.scss"
-        color_generation/applycolor.sh
     fi
 elif [ "$backend" = "material" ]; then
     color_generation/generate_colors_material.py --path "$1" \
@@ -53,7 +52,6 @@ elif [ "$backend" = "material" ]; then
     > "$HOME"/.cache/ags/user/generated/material_colors.scss
     if [ "$2" = "--apply" ]; then
         cp "$HOME"/.cache/ags/user/generated/material_colors.scss "$HOME/.config/ags/scss/_material.scss"
-        color_generation/applycolor.sh
     fi
 elif [ "$backend" = "pywal" ]; then
     # clear and generate
@@ -76,6 +74,8 @@ elif [ "$backend" = "pywal" ]; then
 
         cp "$HOME"/.cache/ags/user/generated/colors_classes.scss "$HOME/.config/ags/scss/_material.scss"
 
-        color_generation/applycolor.sh
     fi
 fi
+
+~/.config/ags/scripts/color_generation/applycolor.sh
+
