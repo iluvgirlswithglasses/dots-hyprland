@@ -3,113 +3,141 @@
 #### --------------------- system variables --------------------- ####
 ######################################################################
 
-set -x PATH $PATH /usr/sbin ~/.local/bin
+export PATH=$PATH:/usr/sbin:~/.local/bin
+
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
 
 
 ######################################################################
 #### ---------------------- greeting scene ---------------------- ####
 ######################################################################
 
-macchina-linux-x86_64
+macchina-linux-x86_64;
+printf "that's that, and this is this\n";
 
 
 #######################################################################
 #### -------------------------- aliases -------------------------- ####
 #######################################################################
 
-alias py="python3"
-alias vim="nvim"
-alias cin="cat"
-alias q="exit"
-alias :q="exit"
-alias clip="wl-copy"
+alias py="python3";
+alias vim="nvim";
+alias cin="cat";
+alias q="exit";
+alias :q="exit";
+alias clip="wl-copy";
 
 
 #######################################################################
 #### ------------------ quick directory actions ------------------ ####
 #######################################################################
 
-function qpush
-    git add .
-    git commit -m $argv
-    git push
-end
+function qpush() {
+	git add .;
+	git commit -m "$1";
+	git push;
+}
 
-function pullsh
-    git pull
-    qpush $argv
-end
+function pullsh() {
+	git pull;
+	qpush $1;
+}
 
-function yd
-    pwd | wl-copy;
-end
+function lsi() {
+	# print file with index $1
+	ls | sed -n $1p;
+}
+
+function cdi() {
+	# cd to folder with index $1
+	cd "`ls | sed -n $1p`";
+}
+
+function yd() {
+	# yank current directory path
+	pwd | wl-copy;
+}
+
+function yf() {
+	# yank the path of the file with index $1
+	echo "`readlink -f ./`/`ls | sed -n $1p`" | wl-copy
+}
 
 
 #######################################################################
 #### ------------------------ mpv aliases ------------------------ ####
 #######################################################################
 
-function mpvp
+function mpvp() {
 	# mpv plays a file
 	mpv "`ls | sed -n $1p`";
-end
+}
 
-function mpvd
+function mpvd() {
 	# mpv plays everything in directory
 	ls | egrep '\.flac$|\.wav$|\.ogg$|\.mka$|\.webm$|\.m4a$|\.mp3$|\.mkv$|>' > ".mpv-pl-list";
 	mpv -playlist=".mpv-pl-list";
 	rm ".mpv-pl-list";
-end
+}
 
-function mpva
+function mpva() {
 	# mpv plays audio with no display
 	mpv "`ls | sed -n $1p`" --no-audio-display;
-end
+}
 
-function mpvl
+function mpvl() {
 	# mpv plays everything in directory with no display
 	ls | egrep '\.flac$|\.wav$|\.ogg$|\.mka$|\.webm$|\.m4a$|\.mp3$|\.mkv$|\.mp4$' > ".mpv-pl-list";
 	mpv -playlist=".mpv-pl-list" --no-audio-display;
 	rm ".mpv-pl-list";
-end
+}
 
-function mpvr
+function mpvr() {
 	# recursively plays everything in directory with no display
 	find . -print | egrep '\.flac$|\.wav$|\.ogg$|\.mka$|\.webm$|\.m4a$|\.mp3$|\.mkv$|\.mp4$' > ".mpv-pl-list";
 	mpv -playlist=".mpv-pl-list" --no-audio-display;
 	rm ".mpv-pl-list";
-end
+}
 
 
 #######################################################################
 #### ---------------------- terminal config ---------------------- ####
 #######################################################################
 
-function fish_prompt -d "Write out the prompt"
-    # This shows up as USER@HOST /home/user/ >, with the directory colored
-    # $USER and $hostname are set by fish, so you can just use them
-    # instead of using `whoami` and `hostname`
-    printf '%s@%s %s%s%s > ' $USER $hostname \
-        (set_color $fish_color_cwd) (prompt_pwd) (set_color normal)
-end
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors -b)"
+alias ls='ls $LS_OPTIONS'
 
-function postexec_test --on-event fish_postexec
-   echo
-end
+if [ "${TERM:0:5}" == "xterm" ]
+then
+	typeset TERM=xterm-color  # force colour prompt
+fi
 
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-    set fish_greeting
-end
+function statstring {
+RC=$?
+	if [ "0" != $RC ]; then
+		printf "[$RC] "
+	fi
+}
 
-# starship init fish | source
-if test -f ~/.cache/ags/user/generated/terminal/sequences.txt
-    cat ~/.cache/ags/user/generated/terminal/sequences.txt
-end
+case "$TERM" in xterm-color)
+	# PS1='${arch_chroot:+($arch_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+	if [ "$USER" = root ]; then
+		PS1='\[\033[01;31m\]$(statstring)\[\033[00m\]${arch_chroot:+($arch_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\] \$ '
+	else
+		PS1='\[\033[01;31m\]$(statstring)\[\033[00m\]${arch_chroot:+($arch_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\] \$ '
+	fi
+	;;
+*)
+	PS1='${arch_chroot:+($arch_chroot)}\u@\h:\W\$ '
+	;;
+esac
 
-fish_config prompt choose pythonista
+cat ~/.cache/ags/user/generated/terminal/sequences.txt
 
-# function fish_prompt
-#   set_color cyan; echo (pwd)
-#   set_color green; echo '> '
-# end
+# BEGIN_KITTY_SHELL_INTEGRATION
+if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+# END_KITTY_SHELL_INTEGRATION
+
