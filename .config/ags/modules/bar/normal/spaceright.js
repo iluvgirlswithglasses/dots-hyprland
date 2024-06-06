@@ -54,7 +54,7 @@ export default () => {
     const emptyArea = SpaceRightDefaultClicks(Widget.Box({ hexpand: true, }));
     const indicatorArea = SpaceRightDefaultClicks(Widget.Box({
         children: [
-            SeparatorDot(),
+            // SeparatorDot(),
             barStatusIcons
         ],
     }));
@@ -63,24 +63,24 @@ export default () => {
         className: 'spacing-h-5 bar-spaceright',
         children: [
             emptyArea,
-            barTray,
+            // barTray,
             indicatorArea
         ],
     });
 
     return Widget.EventBox({
-        onScrollUp: () => {
-            if (!Audio.speaker) return;
-            if (Audio.speaker.volume <= 0.09) Audio.speaker.volume += 0.01;
-            else Audio.speaker.volume += 0.03;
-            Indicator.popup(1);
-        },
-        onScrollDown: () => {
-            if (!Audio.speaker) return;
-            if (Audio.speaker.volume <= 0.09) Audio.speaker.volume -= 0.01;
-            else Audio.speaker.volume -= 0.03;
-            Indicator.popup(1);
-        },
+        // onScrollUp: () => {
+        //     if (!Audio.speaker) return;
+        //     if (Audio.speaker.volume <= 0.09) Audio.speaker.volume += 0.01;
+        //     else Audio.speaker.volume += 0.03;
+        //     Indicator.popup(1);
+        // },
+        // onScrollDown: () => {
+        //     if (!Audio.speaker) return;
+        //     if (Audio.speaker.volume <= 0.09) Audio.speaker.volume -= 0.01;
+        //     else Audio.speaker.volume -= 0.03;
+        //     Indicator.popup(1);
+        // },
         child: Widget.Box({
             children: [
                 actualContent,
