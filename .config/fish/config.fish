@@ -5,6 +5,10 @@
 
 set -x PATH $PATH /usr/sbin ~/.local/bin
 
+abbr --add cloneme git clone ssh+git://git@github.com/iluvgirlswithglasses/
+abbr --add setntp timedatectl set-ntp
+abbr --add settime sudo timedatectl set-time
+
 
 ######################################################################
 #### ---------------------- greeting scene ---------------------- ####
@@ -41,43 +45,7 @@ function pullsh
 end
 
 function yd
-    pwd | wl-copy;
-end
-
-
-#######################################################################
-#### ------------------------ mpv aliases ------------------------ ####
-#######################################################################
-
-function mpvp
-	# mpv plays a file
-	mpv "`ls | sed -n $1p`";
-end
-
-function mpvd
-	# mpv plays everything in directory
-	ls | egrep '\.flac$|\.wav$|\.ogg$|\.mka$|\.webm$|\.m4a$|\.mp3$|\.mkv$|>' > ".mpv-pl-list";
-	mpv -playlist=".mpv-pl-list";
-	rm ".mpv-pl-list";
-end
-
-function mpva
-	# mpv plays audio with no display
-	mpv "`ls | sed -n $1p`" --no-audio-display;
-end
-
-function mpvl
-	# mpv plays everything in directory with no display
-	ls | egrep '\.flac$|\.wav$|\.ogg$|\.mka$|\.webm$|\.m4a$|\.mp3$|\.mkv$|\.mp4$' > ".mpv-pl-list";
-	mpv -playlist=".mpv-pl-list" --no-audio-display;
-	rm ".mpv-pl-list";
-end
-
-function mpvr
-	# recursively plays everything in directory with no display
-	find . -print | egrep '\.flac$|\.wav$|\.ogg$|\.mka$|\.webm$|\.m4a$|\.mp3$|\.mkv$|\.mp4$' > ".mpv-pl-list";
-	mpv -playlist=".mpv-pl-list" --no-audio-display;
-	rm ".mpv-pl-list";
+    pwd | tr -d '\n' | wl-copy;
 end
 
 
