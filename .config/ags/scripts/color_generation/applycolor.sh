@@ -142,6 +142,32 @@ apply_gtk() { # Using gradience-cli
     fi
 }
 
+apply_shyfox() {
+    color_file=""
+    tmplt_file="$HOME/.config/ags/scripts/templates/ilgwg-shyfox-color.css"
+
+    # check if the default profile is configured
+    if [ ! -f "$HOME"/.mozilla/default-profile ]; then
+        echo "[For Shyfox users] Firefox default profile is not set"
+        echo "Please set the path of your default Filefox profile in ~/.mozilla/default-profile"
+        echo "E.g. \`echo ~/.mozilla/firefox/sx822052.default-release | cat > ~/.mozilla/default-profile\`"
+        return
+    fi
+    # check if ilgwg Shyfox is installed
+    color_dir="$(cat ~/.mozilla/default-profile)/chrome/ilgwg"
+    color_file="${color_dir}/color.css"
+    if [ ! -d "${color_dir}" ]; then
+        echo "Shyfox is not installed, exiting..."
+        return
+    fi
+
+    # apply color
+    cp "${tmplt_file}" "${color_file}"
+    for i in "${!colorlist[@]}"; do
+        sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]}/g" "${color_file}"
+    done
+}
+
 apply_ags() {
     sass "$HOME"/.config/ags/scss/main.scss "$HOME"/.cache/ags/user/generated/style.css
     ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'
@@ -170,3 +196,5 @@ apply_hyprlock &
 apply_gtk &
 apply_fuzzel &
 apply_term &
+apply_shyfox &
+
