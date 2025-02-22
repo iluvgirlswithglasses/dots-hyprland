@@ -192,7 +192,6 @@ fi
 
 apply_ags &
 apply_hyprland &
-apply_hyprlock &
 apply_gtk &
 apply_fuzzel &
 apply_term &
