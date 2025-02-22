@@ -5,7 +5,7 @@
         "theme_text_color": "#AEE5FA",
         "theme_bg_color": "#1a1b26",
         "theme_base_color": "#1a1b26",
-        "theme_selected_bg_color": "#AEE5FA",
+        "theme_selected_bg_color": "{{ $onPrimary }}",
         "theme_selected_fg_color": "rgba(0, 0, 0, 0.87)",
         "insensitive_bg_color": "#1a1b26",
         "insensitive_fg_color": "rgba(192, 202, 245, 0.5)",
