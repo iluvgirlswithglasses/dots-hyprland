@@ -15,7 +15,6 @@ import Dock from './modules/dock/main.js';
 import Corner from './modules/screencorners/main.js';
 import Indicator from './modules/indicators/main.js';
 import Osk from './modules/onscreenkeyboard/main.js';
-import Overview from './modules/overview/main.js';
 import Session from './modules/session/main.js';
 import SideLeft from './modules/sideleft/main.js';
 import SideRight from './modules/sideright/main.js';
@@ -47,7 +46,6 @@ applyStyle().catch(print);
 const Windows = () => [
     // forMonitors(DesktopBackground),
 
-    Overview(),
     forMonitors(Indicator),
     forMonitors(Cheatsheet),
     SideLeft(),

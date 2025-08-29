@@ -152,50 +152,21 @@ const BatteryModule = () => Stack({
                         label: 'Weather',
                     })
                 ],
-                setup: (self) => self.poll(900000, async (self) => {
-                    const WEATHER_CACHE_PATH = WEATHER_CACHE_FOLDER + '/wttr.in.txt';
-                    const updateWeatherForCity = (city) => execAsync(`curl https://wttr.in/${city.replace(/ /g, '%20')}?format=j1`)
-                        .then(output => {
-                            const weather = JSON.parse(output);
-                            Utils.writeFile(JSON.stringify(weather), WEATHER_CACHE_PATH)
-                                .catch(print);
-                            const weatherCode = weather.current_condition[0].weatherCode;
-                            const weatherDesc = weather.current_condition[0].weatherDesc[0].value;
-                            const temperature = weather.current_condition[0].temp_C;
-                            const feelsLike = weather.current_condition[0].FeelsLikeC;
-                            const weatherSymbol = WEATHER_SYMBOL[WWO_CODE[weatherCode]];
-                            self.children[0].label = weatherSymbol;
-                            self.children[1].label = `${temperature}℃ • Feels like ${feelsLike}℃`;
-                            self.tooltipText = weatherDesc;
-                        }).catch((err) => {
-                            try { // Read from cache
-                                const weather = JSON.parse(
-                                    Utils.readFile(WEATHER_CACHE_PATH)
-                                );
-                                const weatherCode = weather.current_condition[0].weatherCode;
-                                const weatherDesc = weather.current_condition[0].weatherDesc[0].value;
-                                const temperature = weather.current_condition[0].temp_C;
-                                const feelsLike = weather.current_condition[0].FeelsLikeC;
-                                const weatherSymbol = WEATHER_SYMBOL[WWO_CODE[weatherCode]];
-                                self.children[0].label = weatherSymbol;
-                                self.children[1].label = `${temperature}℃ • Feels like ${feelsLike}℃`;
-                                self.tooltipText = weatherDesc;
-                            } catch (err) {
-                                print(err);
-                            }
-                        });
-                    if (userOptions.weather.city != '' && userOptions.weather.city != null) {
-                        updateWeatherForCity(userOptions.weather.city.replace(/ /g, '%20'));
-                    }
-                    else {
-                        Utils.execAsync('curl ipinfo.io')
-                            .then(output => {
-                                return JSON.parse(output)['city'].toLowerCase();
-                            })
-                            .then(updateWeatherForCity)
-                            .catch(print)
-                    }
+                setup: (self) => self.poll(5000, async (self) => {
+                    // wrap this in `bash -c "..."` or it wouldn't work (why end-4?)
+                    const cmd = `ip a | grep -oP '192\\.168\\.1\\.(?!255)\\d+' | head -n1`;
+                    execAsync(`bash -c "${cmd}"`).then(output => {
+                        const ip = output.trim();
+                        self.children[0].label = "󰀂 ";
+                        self.children[1].label = ip;
+                        self.tooltipText = `Local IP: ${ip}`;
+                    }).catch(err => {
+                        self.children[0].label = "󰀂 ";
+                        self.children[1].label = "No local IP";
+                        self.tooltipText = "Failed to fetch local IP";
+                    });
                 }),
+
             })
         }),
     },
