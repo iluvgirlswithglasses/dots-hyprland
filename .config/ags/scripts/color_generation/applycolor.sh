@@ -147,14 +147,14 @@ apply_shyfox() {
     tmplt_file="$HOME/.config/ags/scripts/templates/ilgwg-shyfox-color.css"
 
     # check if the default profile is configured
-    if [ ! -f "$HOME"/.mozilla/default-profile ]; then
-        echo "[For Shyfox users] Firefox default profile is not set"
-        echo "Please set the path of your default Filefox profile in ~/.mozilla/default-profile"
-        echo "E.g. \`echo ~/.mozilla/firefox/sx822052.default-release | cat > ~/.mozilla/default-profile\`"
+    if [ ! -f "$HOME"/.waterfox/default-profile ]; then
+        echo "[For Shyfox users] Waterfox default profile is not set"
+        echo "Please set the path of your default Waterfox profile in ~/.waterfox/default-profile"
+        echo "E.g. \`echo ~/.waterfox/sx822052.default-release | cat > ~/.waterfox/default-profile\`"
         return
     fi
     # check if ilgwg Shyfox is installed
-    color_dir="$(cat ~/.mozilla/default-profile)/chrome/ilgwg"
+    color_dir="$(cat ~/.waterfox/default-profile)/chrome/ilgwg"
     color_file="${color_dir}/color.css"
     if [ ! -d "${color_dir}" ]; then
         echo "Shyfox is not installed, exiting..."
