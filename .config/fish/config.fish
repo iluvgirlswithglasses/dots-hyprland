@@ -10,13 +10,6 @@ abbr --add setntp timedatectl set-ntp
 abbr --add settime sudo timedatectl set-time
 
 
-######################################################################
-#### ---------------------- greeting scene ---------------------- ####
-######################################################################
-
-macchina-linux-x86_64
-
-
 #######################################################################
 #### -------------------------- aliases -------------------------- ####
 #######################################################################
@@ -32,17 +25,6 @@ alias clip="wl-copy"
 #######################################################################
 #### ------------------ quick directory actions ------------------ ####
 #######################################################################
-
-function qpush
-    git add .
-    git commit -m $argv
-    git push
-end
-
-function pullsh
-    git pull
-    qpush $argv
-end
 
 function yd
     pwd | tr -d '\n' | wl-copy;
@@ -68,6 +50,7 @@ end
 if status is-interactive
     # Commands to run in interactive sessions can go here
     set fish_greeting
+    macchina-linux-x86_64
 end
 
 # starship init fish | source
