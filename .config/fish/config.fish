@@ -23,11 +23,18 @@ alias clip="wl-copy"
 
 
 #######################################################################
-#### ------------------ quick directory actions ------------------ ####
+#### ----------------------- quick actions ----------------------- ####
 #######################################################################
 
 function yd
     pwd | tr -d '\n' | wl-copy;
+end
+
+function rundisown
+    echo $argv[1..]
+    $argv[1..] 2> /dev/null &
+    set PID (jobs --last --pid)
+    disown $PID
 end
 
 
