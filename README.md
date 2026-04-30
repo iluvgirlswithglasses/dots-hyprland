@@ -1,7 +1,10 @@
 
 This fork survives to keep the old looks and feels of illogical impulse intact. I just simply prefer the vibrant, glassy feels of the old illogical impulse.
 
+<img width="1919" height="1081" alt="image" src="https://github.com/user-attachments/assets/2a00567e-401c-4ad5-a455-df80bab5f7a0" />
+
 ![img](./img.png)
+
 <details>
   <summary>View Desktop Showcase</summary>
   <img width="3000" height="1920" alt="image" src="https://github.com/user-attachments/assets/34592aec-dbe4-49f0-8c55-89aa98b162f2" />
