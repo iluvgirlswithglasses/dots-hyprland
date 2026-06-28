@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+source "$HOME/.config/ags/scripts/color_generation/paths.sh"
 
 if [ "$1" == "--pick" ]; then
-  color=$(hyprpicker --no-fancy)
+    color=$(hyprpicker --no-fancy)
 else
-  color=$(cut -f1 "${HOME}/.cache/ags/user/color.txt")
+    color=$(cut -f1 "$GEN_COLOR_CACHE")
 fi
 
-# Generate colors for ags n stuff
-"$HOME"/.config/ags/scripts/color_generation/colorgen.sh "${color}" --apply
+"$COLORGEN_SCRIPT" "${color}" --apply
