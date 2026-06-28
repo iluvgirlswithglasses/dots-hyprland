@@ -1,0 +1,2 @@
+gtk-theme='adw-gtk3-dark'
+color-scheme='prefer-dark'

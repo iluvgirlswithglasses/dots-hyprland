@@ -1,0 +1,65 @@
+/* GTK4 / GTK3 color overrides — generated from Material You palette.
+   Written to ~/.config/gtk-4.0/gtk.css and ~/.config/gtk-3.0/gtk.css. */
+
+/* Accent */
+@define-color accent_bg_color {{ $primary }};
+@define-color accent_fg_color {{ $onPrimary }};
+@define-color accent_color {{ $primary }};
+
+/* Window */
+@define-color window_bg_color {{ $background }};
+@define-color window_fg_color {{ $onBackground }};
+
+/* Views (lists, text views) */
+@define-color view_bg_color {{ $surface }};
+@define-color view_fg_color {{ $onSurface }};
+
+/* Headerbar */
+@define-color headerbar_bg_color {{ $surfaceContainer }};
+@define-color headerbar_fg_color {{ $onSurface }};
+@define-color headerbar_border_color {{ $outlineVariant }};
+@define-color headerbar_backdrop_color {{ $surfaceContainerLow }};
+@define-color headerbar_shade_color rgba(0, 0, 0, 0.07);
+
+/* Cards */
+@define-color card_bg_color {{ $surfaceContainerLow }};
+@define-color card_fg_color {{ $onSurface }};
+@define-color card_shade_color rgba(0, 0, 0, 0.07);
+
+/* Dialogs and popovers */
+@define-color dialog_bg_color {{ $surfaceContainerHigh }};
+@define-color dialog_fg_color {{ $onSurface }};
+@define-color popover_bg_color {{ $surfaceContainerHigh }};
+@define-color popover_fg_color {{ $onSurface }};
+
+/* Sidebar */
+@define-color sidebar_bg_color {{ $surfaceContainerLow }};
+@define-color sidebar_fg_color {{ $onSurface }};
+@define-color sidebar_border_color {{ $outlineVariant }};
+@define-color sidebar_backdrop_color {{ $surfaceContainerLowest }};
+
+/* Destructive / error */
+@define-color destructive_bg_color {{ $error }};
+@define-color destructive_fg_color {{ $onError }};
+@define-color destructive_color {{ $error }};
+@define-color error_bg_color {{ $error }};
+@define-color error_fg_color {{ $onError }};
+@define-color error_color {{ $error }};
+
+/* Success */
+@define-color success_bg_color {{ $success }};
+@define-color success_fg_color {{ $onSuccess }};
+@define-color success_color {{ $success }};
+
+/* Warning (no Material equivalent; neutral amber) */
+@define-color warning_bg_color #E6C200;
+@define-color warning_fg_color rgba(0, 0, 0, 0.87);
+@define-color warning_color #E6C200;
+
+/* Thumbnails */
+@define-color thumbnail_bg_color {{ $surfaceContainerHighest }};
+@define-color thumbnail_fg_color {{ $onSurface }};
+
+/* Shadows and overlays */
+@define-color shade_color rgba(0, 0, 0, 0.36);
+@define-color scrollbar_outline_color rgba(0, 0, 0, 0.5);
