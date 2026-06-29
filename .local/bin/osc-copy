@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# read from stdin or arguments
+if [ -t 0 ]; then
+    text="$*"
+else
+    text=$(cat)
+fi
+
+# encode and send the OSC 52 sequence
+printf "\033]52;c;$(printf "%s" "$text" | base64 | tr -d '\n')\a"
+
